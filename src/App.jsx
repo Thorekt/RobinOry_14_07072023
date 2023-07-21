@@ -9,18 +9,18 @@ import './app/styles/app.css';
 
 function App() {
   return (
-    <main>
-      <Router>
-        <NavBar />
-        <div className="main-container">
-          <Routes>
-            <Route index element={<CreateEmployee />} />
-            <Route path="/EmployeeList" element={<EmployeeList />} />
-            <Route path="/*" element={<Error />} />
-          </Routes>
-        </div>
-      </Router>
-    </main>
+
+    <Router>
+      <NavBar />
+      <main className="container">
+        <Routes>
+          <Route index element={<CreateEmployee />} />
+          <Route path="/EmployeeList" element={<EmployeeList />} />
+          <Route path="/*" element={<Error />} />
+        </Routes>
+      </main>
+    </Router>
+
   );
 }
 

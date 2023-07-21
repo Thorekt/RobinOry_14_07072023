@@ -4,8 +4,12 @@ import EmployeeForm from '../components/EmployeeForm';
 export default function CreateEmployee() {
   return (
     <>
-      <h2>Create Employee</h2>
-      <EmployeeForm />
+      <div className="row">
+        <h1>Create Employee</h1>
+      </div>
+      <div className="row">
+        <EmployeeForm />
+      </div>
     </>
   );
 }

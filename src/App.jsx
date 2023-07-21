@@ -8,7 +8,7 @@ import './app/styles/app.css'
 
 function App() {
   return (
-    <div className='main-container'>
+    <div className='main'>
     <Router>
       <Header/>
       <Routes>

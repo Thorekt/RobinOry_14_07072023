@@ -1,9 +1,13 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
+function handleSubmit(event) {
+  event.preventDefault();
+}
+
 export default function EmployeeForm() {
   return (
-    <form className="container">
+    <form className="container" onSubmit={handleSubmit}>
       <div className="row">
         <div className="col">
           <label htmlFor="firstName" className="form-label">
@@ -76,7 +80,7 @@ export default function EmployeeForm() {
       </div>
       <div className="row justify-content-center">
         <div className="col-2">
-          <Button type="submit" className="btn-primary btn-lg">Save</Button>
+          <Button type="submit" className="btn-lg">Save</Button>
         </div>
       </div>
     </form>

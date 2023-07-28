@@ -1,35 +1,12 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { useSelector } from 'react-redux';
+import selectEmployee from '../utils/selectors';
 import EmployeeTableRow from './EmployeeTableRow';
 
-const employees = [
-  {
-    id: 0,
-    firstName: 'John',
-    lastName: 'Doe',
-    startDate: '2020-01-01',
-    department: 'Engineering',
-    birthDate: '1990-01-01',
-    street: '123 Main St',
-    city: 'Anytown',
-    state: 'CA',
-    zipCode: '12345',
-  },
-  {
-    id: 1,
-    firstName: 'Jane',
-    lastName: 'Doe',
-    startDate: '2020-01-01',
-    department: 'Engineering',
-    birthDate: '1990-01-01',
-    street: '123 Main St',
-    city: 'Anytown',
-    state: 'CA',
-    zipCode: '12345',
-  },
-];
-
 export default function EmployeeTable() {
+  const { list } = useSelector(selectEmployee);
+  const employees = list;
   return (
     <Table>
       <thead>

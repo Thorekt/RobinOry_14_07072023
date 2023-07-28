@@ -7,6 +7,7 @@ import EmployeeTableRow from './EmployeeTableRow';
 export default function EmployeeTable() {
   const { list } = useSelector(selectEmployee);
   const employees = list;
+
   return (
     <Table>
       <thead>

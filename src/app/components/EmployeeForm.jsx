@@ -8,6 +8,37 @@ export default function EmployeeForm() {
   const dispatch = useDispatch();
   const { list } = useSelector(selectEmployee);
 
+  function isValidEmployee(employee) {
+    if (employee.firstName === '') {
+      return false;
+    }
+    if (employee.lastName === '') {
+      return false;
+    }
+    if (employee.birthDate === '') {
+      return false;
+    }
+    if (employee.startDate === '') {
+      return false;
+    }
+    if (employee.street === '') {
+      return false;
+    }
+    if (employee.city === '') {
+      return false;
+    }
+    if (employee.state === '') {
+      return false;
+    }
+    if (employee.zipCode === '') {
+      return false;
+    }
+    if (employee.departement === '') {
+      return false;
+    }
+    return true;
+  }
+
   function clearForm() {
     document.getElementById('firstName').value = '';
     document.getElementById('lastName').value = '';
@@ -34,8 +65,12 @@ export default function EmployeeForm() {
       zipCode: e.target.elements.zipCode.value,
       departement: e.target.elements.departement.value,
     };
-    dispatch(addEmployeeAction(employee));
-    clearForm();
+    if (isValidEmployee(employee) === true) {
+      dispatch(addEmployeeAction(employee));
+      clearForm();
+    } else {
+      alert('Please fill out all fields');
+    }
   }
 
   return (
@@ -107,7 +142,13 @@ export default function EmployeeForm() {
       <div>
         <label htmlFor="departement" className="form-label">
           Department
-          <input type="text" id="departement" name="departement" className="form-control" />
+          <select type="text" id="departement" name="departement" className="form-control form-select">
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Legal">Legal</option>
+          </select>
         </label>
 
       </div>

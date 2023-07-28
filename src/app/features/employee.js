@@ -1,13 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
-import selectEmployee from '../utils/selectors';
 
-const { reducer, actions } = createSlice({
+const { actions, reducer } = createSlice({
   name: 'employee',
   initialState: {
+    list: [],
   },
   reducers: {
+    addEmployee: {
+      prepare: (employee) => ({
+        payload: {
+          ...employee,
+        },
+      }),
+      reducer: (state, action) => {
+        state.list.push(action.payload);
+      },
+    },
   },
 });
 
-actions.selectEmployee = selectEmployee;
+const { addEmployee } = actions;
+
+export function addEmployeeAction(employee) {
+  return (dispatch) => {
+    dispatch(addEmployee(employee));
+  };
+}
+
 export default reducer;

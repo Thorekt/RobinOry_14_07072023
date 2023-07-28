@@ -1,11 +1,43 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-
-function handleSubmit(event) {
-  event.preventDefault();
-}
+import { useSelector, useDispatch } from 'react-redux';
+import selectEmployee from '../utils/selectors';
+import { addEmployeeAction } from '../features/employee';
 
 export default function EmployeeForm() {
+  const dispatch = useDispatch();
+  const { list } = useSelector(selectEmployee);
+
+  function clearForm() {
+    document.getElementById('firstName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('birthDate').value = '';
+    document.getElementById('startDate').value = '';
+    document.getElementById('street').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('zipCode').value = '';
+    document.getElementById('departement').value = '';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const employee = {
+      id: list.length,
+      firstName: e.target.elements.firstName.value,
+      lastName: e.target.elements.lastName.value,
+      birthDate: e.target.elements.birthDate.value,
+      startDate: e.target.elements.startDate.value,
+      street: e.target.elements.street.value,
+      city: e.target.elements.city.value,
+      state: e.target.elements.state.value,
+      zipCode: e.target.elements.zipCode.value,
+      departement: e.target.elements.departement.value,
+    };
+    dispatch(addEmployeeAction(employee));
+    clearForm();
+  }
+
   return (
     <form className="container" onSubmit={handleSubmit}>
       <div className="row">
@@ -55,26 +87,27 @@ export default function EmployeeForm() {
 
           </div>
         </div>
+        <div className="row">
+          <div className="col">
+            <label htmlFor="state" className="form-label">
+              State
+              <input type="text" id="state" name="state" className="form-control" />
+            </label>
 
-        <div>
-          <label htmlFor="state" className="form-label">
-            State
-            <input type="text" id="state" name="state" className="form-control" />
-          </label>
+          </div>
+          <div className="col">
+            <label htmlFor="zipCode" className="form-label">
+              Zip Code
+              <input type="text" id="zipCode" name="zipCode" className="form-control" />
+            </label>
 
-        </div>
-        <div>
-          <label htmlFor="zipCode" className="form-label">
-            Zip Code
-            <input type="text" id="zipCode" name="zipCode" className="form-control" />
-          </label>
-
+          </div>
         </div>
       </fieldset>
       <div>
-        <label htmlFor="Departement" className="form-label">
+        <label htmlFor="departement" className="form-label">
           Department
-          <input type="text" id="Departement" name="Departement" className="form-control" />
+          <input type="text" id="departement" name="departement" className="form-control" />
         </label>
 
       </div>

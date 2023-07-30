@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
 
 export default function EmployeeForm() {
   const dispatch = useDispatch();
   const { list } = useSelector(selectEmployee);
+
+  const [birthDate, setBirthDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
 
   function isValidEmployee(employee) {
     if (employee.firstName === '') {
@@ -91,16 +96,22 @@ export default function EmployeeForm() {
       </div>
       <div className="row">
         <div className="col">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="birthDate" className="form-label">
             Date of Birth
-            <input type="date" id="birthDate" name="birthDate" className="form-control" />
+            <div>
+              <DatePicker className="form-control" id="birthDate" isClearable selected={birthDate} onChange={(date) => setBirthDate(date)} />
+            </div>
           </label>
 
         </div>
         <div className="col">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="startDate" className="form-label">
             Start Date
-            <input type="date" id="startDate" name="startDate" className="form-control" />
+            <div>
+              <DatePicker className="form-control" id="startDate" isClearable selected={startDate} onChange={(date) => setStartDate(date)} />
+            </div>
           </label>
         </div>
       </div>
@@ -133,7 +144,7 @@ export default function EmployeeForm() {
           <div className="col">
             <label htmlFor="zipCode" className="form-label">
               Zip Code
-              <input type="text" id="zipCode" name="zipCode" className="form-control" />
+              <input type="number" id="zipCode" name="zipCode" className="form-control" />
             </label>
 
           </div>

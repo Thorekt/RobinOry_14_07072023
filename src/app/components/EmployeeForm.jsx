@@ -3,8 +3,10 @@ import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Select from 'react-select';
 import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
+import departmentList from '../assets/datas/department';
 
 export default function EmployeeForm() {
   const dispatch = useDispatch();
@@ -53,7 +55,7 @@ export default function EmployeeForm() {
     document.getElementById('city').value = '';
     document.getElementById('state').value = '';
     document.getElementById('zipCode').value = '';
-    document.getElementById('departement').value = '';
+    document.getElementById('department').value = '';
   }
 
   function handleSubmit(e) {
@@ -68,7 +70,7 @@ export default function EmployeeForm() {
       city: e.target.elements.city.value,
       state: e.target.elements.state.value,
       zipCode: e.target.elements.zipCode.value,
-      departement: e.target.elements.departement.value,
+      department: e.target.elements.department.value,
     };
     if (isValidEmployee(employee) === true) {
       dispatch(addEmployeeAction(employee));
@@ -151,15 +153,10 @@ export default function EmployeeForm() {
         </div>
       </fieldset>
       <div>
-        <label htmlFor="departement" className="form-label">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label htmlFor="department" className="form-label">
           Department
-          <select type="text" id="departement" name="departement" className="form-control form-select">
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select>
+          <Select options={departmentList} id="department" name="department" />
         </label>
 
       </div>

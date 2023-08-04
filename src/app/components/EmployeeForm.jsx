@@ -6,7 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
-import departmentList from '../assets/datas/department';
+import departments from '../assets/datas/departments';
+import states from '../assets/datas/states';
 
 export default function EmployeeForm() {
   const dispatch = useDispatch();
@@ -137,16 +138,17 @@ export default function EmployeeForm() {
         </div>
         <div className="row">
           <div className="col">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="state" className="form-label">
               State
-              <input type="text" id="state" name="state" className="form-control" />
+              <Select options={states} id="state" name="state" />
             </label>
 
           </div>
           <div className="col">
             <label htmlFor="zipCode" className="form-label">
               Zip Code
-              <input type="number" id="zipCode" name="zipCode" className="form-control" />
+              <input type="number" id="zipCode" name="zipCode" className="form-control" min="0" />
             </label>
 
           </div>
@@ -156,7 +158,7 @@ export default function EmployeeForm() {
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="department" className="form-label">
           Department
-          <Select options={departmentList} id="department" name="department" />
+          <Select options={departments} id="department" name="department" />
         </label>
 
       </div>

@@ -1,0 +1,21 @@
+.btn {
+    background-color: #6A8206;
+    border: var(--bs-btn-border-width) solid #6A8206;
+}
+
+.btn:hover {
+    background-color: #8dad0b;
+    border: var(--bs-btn-border-width) solid #8dad0b;
+}
+
+.react-datepicker__close-icon::after, .react-datepicker__day--selected{
+    background-color: #6A8206;
+}
+
+.react-datepicker__close-icon:hover::after, .react-datepicker__day--selected:hover, .react-datepicker__day--keyboard-selected:hover{
+    background-color: #8dad0b;
+}
+
+.react-datepicker__day--keyboard-selected{
+    background-color: #bfc999;
+}

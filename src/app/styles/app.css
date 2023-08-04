@@ -1,9 +1,11 @@
 .btn {
+    color: #fff;
     background-color: #6A8206;
     border: var(--bs-btn-border-width) solid #6A8206;
 }
 
-.btn:hover {
+.btn:hover {    
+    color: #fff;
     background-color: #8dad0b;
     border: var(--bs-btn-border-width) solid #8dad0b;
 }

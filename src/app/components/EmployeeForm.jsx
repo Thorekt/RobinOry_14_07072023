@@ -1,9 +1,9 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Select from 'react-select';
 import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
 import departments from '../assets/datas/departments';
@@ -189,7 +189,7 @@ export default function EmployeeForm() {
   }
 
   return (
-    <form className="container needs-validation" onSubmit={handleSubmit} noValidate>
+    <Form className="container needs-validation" onSubmit={handleSubmit} noValidate>
       <div className="row">
         <div className="col">
           <label htmlFor="firstName" className="form-label">
@@ -248,8 +248,11 @@ export default function EmployeeForm() {
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="state" className="form-label">
               State
-              {/* eslint-disable-next-line react/jsx-no-bind */}
-              <Select options={states} id="state" name="state" required onChange={isValidStateInput} />
+              <Form.Select id="state" name="state" aria-label="Default select example" required onChange={isValidStateInput}>
+                {states.map((state) => (
+                  <option key={state.value} value={state.value}>{state.label}</option>
+                ))}
+              </Form.Select>
             </label>
 
           </div>
@@ -266,8 +269,11 @@ export default function EmployeeForm() {
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="department" className="form-label">
           Department
-          {/* eslint-disable-next-line react/jsx-no-bind */}
-          <Select options={departments} id="department" name="department" required onChange={isValidDepartmentInput} />
+          <Form.Select id="department" name="department" aria-label="Default select example" required onChange={isValidDepartmentInput}>
+            {departments.map((department) => (
+              <option key={department.value} value={department.value}>{department.label}</option>
+            ))}
+          </Form.Select>
         </label>
 
       </div>
@@ -276,6 +282,6 @@ export default function EmployeeForm() {
           <Button type="submit" className="btn-lg">Save</Button>
         </div>
       </div>
-    </form>
+    </Form>
   );
 }

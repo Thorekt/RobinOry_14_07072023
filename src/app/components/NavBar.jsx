@@ -8,7 +8,7 @@ export default function NavBar() {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <image className="" src={logo} alt="Logo" />
+          <img className="navbar-logo" src={logo} alt="Logo" />
           HRnet
         </Link>
         <ul className="nav nav-pills ">

@@ -7,7 +7,19 @@
     color: #6A8206;
 }
 
+.navbar .navbar-brand:hover{
+    color: #8dad0b;
+}
+
 .navbar .navbar-brand{
     font-size: 26px;
     font-weight: 700;
+}
+
+.navbar-logo{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px; 
+    border-radius: 20%;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
 }

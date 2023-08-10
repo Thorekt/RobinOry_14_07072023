@@ -16,32 +16,47 @@ export default function EmployeeForm() {
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
 
+  const numberRegex = /^[0-9]+$/;
+  const nameRegex = /^[a-zA-Z]+$/;
+  const dateRegex = /^(0?[1-9]|1[0-2])[/](0?[1-9]|[12]\d|3[01])[/](19|20)\d{2}$/;
+  const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
+
   function isValidEmployee(employee) {
-    if (employee.firstName === '') {
+    if (employee.firstName === '' || nameRegex.test(employee.firstName) === false) {
+      console.log('first name');
       return false;
     }
-    if (employee.lastName === '') {
+    if (employee.lastName === '' || nameRegex.test(employee.lastName) === false) {
+      console.log('last name');
       return false;
     }
-    if (employee.birthDate === '') {
+    if (employee.birthDate === '' || dateRegex.test(employee.birthDate) === false) {
+      console.log('birth date');
+      console.log(employee.birthDate);
       return false;
     }
-    if (employee.startDate === '') {
+    if (employee.startDate === '' || dateRegex.test(employee.startDate) === false) {
+      console.log('start date');
       return false;
     }
-    if (employee.street === '') {
+    if (employee.street === '' || streetRegex.test(employee.street) === false) {
+      console.log('street');
       return false;
     }
-    if (employee.city === '') {
+    if (employee.city === '' || nameRegex.test(employee.city) === false) {
+      console.log('city');
       return false;
     }
-    if (employee.state === '') {
+    if (states.find((state) => state.value === employee.state) === undefined) {
+      console.log('state');
       return false;
     }
-    if (employee.zipCode === '') {
+    if (employee.zipCode === '' || numberRegex.test(employee.zipCode) === false) {
+      console.log('zip code');
       return false;
     }
-    if (employee.departement === '') {
+    if (departments.find((department) => department.value === employee.department) === undefined) {
+      console.log('department');
       return false;
     }
     return true;

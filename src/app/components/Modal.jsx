@@ -4,18 +4,24 @@ import '../styles/components/modal.css';
 import close from '../assets/images/close-icon.svg';
 
 export default function Modal({
-  title, children, onClickClose, isModalOpen,
+  title, children, onClickClose, isModalOpen, classNames,
 }) {
+  const containerClassNames = `modal-container ${isModalOpen ? 'active' : ''} ${classNames.container}`;
+  const contentClassNames = `modal-content ${classNames.content}`;
+  const headerClassNames = `modal-header ${classNames.header}`;
+  const titleClassNames = `modal-title ${classNames.title}`;
+  const closeClassNames = `modal-close ${classNames.close}`;
+  const bodyClassNames = `modal-body ${classNames.body}`;
   return (
-    <div className={`modal-container ${isModalOpen ? 'active' : ''}`}>
-      <div className="modal-content">
-        <header className="modal-header">
-          <h3 className="modal-title">{title}</h3>
-          <button type="button" className="modal-close" onClick={onClickClose}>
+    <div className={containerClassNames}>
+      <div className={contentClassNames}>
+        <header className={headerClassNames}>
+          <h3 className={titleClassNames}>{title}</h3>
+          <button type="button" className={closeClassNames} onClick={onClickClose}>
             <img src={close} alt="close modal button" />
           </button>
         </header>
-        <div className="modal-body">
+        <div className={bodyClassNames}>
           {children}
         </div>
       </div>
@@ -28,4 +34,23 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   onClickClose: PropTypes.func.isRequired,
   isModalOpen: PropTypes.bool.isRequired,
+  classNames: PropTypes.shape({
+    container: PropTypes.string,
+    content: PropTypes.string,
+    header: PropTypes.string,
+    title: PropTypes.string,
+    close: PropTypes.string,
+    body: PropTypes.string,
+  }),
+};
+
+Modal.defaultProps = {
+  classNames: {
+    container: '',
+    content: '',
+    header: '',
+    title: '',
+    close: '',
+    body: '',
+  },
 };

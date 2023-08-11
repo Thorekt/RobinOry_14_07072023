@@ -8,6 +8,7 @@ import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
 import departments from '../assets/datas/departments';
 import states from '../assets/datas/states';
+import Modal from './Modal';
 
 export default function EmployeeForm() {
   const dispatch = useDispatch();
@@ -189,102 +190,105 @@ export default function EmployeeForm() {
   }
 
   return (
-    <Form className="container needs-validation" onSubmit={handleSubmit} noValidate>
-      <div className="row">
-        <div className="col">
-          <Form.Label htmlFor="firstName">
-            First Name
-            <Form.Control type="text" id="firstName" name="firstName" required onChange={isValidNameInput} />
-          </Form.Label>
-        </div>
-        <div className="col">
-          <Form.Label htmlFor="lastName">
-            Last Name
-            <Form.Control type="text" id="lastName" name="lastName" required onChange={isValidNameInput} />
-          </Form.Label>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <Form.Label htmlFor={birthDateInputName}>
-            Date of Birth
-            <div>
-              <DatePicker className="form-control" id={birthDateInputName} isClearable selected={birthDate} onChange={(date) => handleDateChange(date, birthDateInputName)} required />
-            </div>
-          </Form.Label>
-
-        </div>
-        <div className="col">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <Form.Label htmlFor={startDateInputName}>
-            Start Date
-            <div>
-              <DatePicker className="form-control" id={startDateInputName} isClearable selected={startDate} onChange={(date) => handleDateChange(date, startDateInputName)} required />
-            </div>
-          </Form.Label>
-        </div>
-      </div>
-      <fieldset className="container border rounded">
-        <legend>Address</legend>
+    <>
+      <Form className="container needs-validation" onSubmit={handleSubmit} noValidate>
         <div className="row">
           <div className="col">
-            <Form.Label htmlFor="street">
-              Street
-              <Form.Control type="text" id="street" name="street" required onChange={isValidStreetInput} />
+            <Form.Label htmlFor="firstName">
+              First Name
+              <Form.Control type="text" id="firstName" name="firstName" required onChange={isValidNameInput} />
             </Form.Label>
-
           </div>
           <div className="col">
-            <Form.Label htmlFor="city">
-              City
-              <Form.Control type="text" id="city" name="city" required onChange={isValidNameInput} />
+            <Form.Label htmlFor="lastName">
+              Last Name
+              <Form.Control type="text" id="lastName" name="lastName" required onChange={isValidNameInput} />
             </Form.Label>
-
           </div>
         </div>
         <div className="row">
           <div className="col">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <Form.Label htmlFor="state">
-              State
-              <Form.Select id="state" name="state" aria-label="Default select example" required onChange={isValidStateInput}>
-                {states.map((state) => (
-                  <option key={state.value} value={state.value}>{state.label}</option>
-                ))}
-              </Form.Select>
+            <Form.Label htmlFor={birthDateInputName}>
+              Date of Birth
+              <div>
+                <DatePicker className="form-control" id={birthDateInputName} isClearable selected={birthDate} onChange={(date) => handleDateChange(date, birthDateInputName)} required />
+              </div>
             </Form.Label>
 
           </div>
           <div className="col">
-            <Form.Label htmlFor="zipCode">
-              Zip Code
-              <Form.Control type="number" id="zipCode" name="zipCode" min="0" required onChange={isValidNumberInput} />
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <Form.Label htmlFor={startDateInputName}>
+              Start Date
+              <div>
+                <DatePicker className="form-control" id={startDateInputName} isClearable selected={startDate} onChange={(date) => handleDateChange(date, startDateInputName)} required />
+              </div>
             </Form.Label>
-
           </div>
         </div>
-      </fieldset>
-      <div>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <Form.Label htmlFor="department">
-          Department
-          <Form.Select id="department" name="department" aria-label="Default select example" required onChange={isValidDepartmentInput}>
-            {departments.map((department) => (
-              <option key={department.value} value={department.value}>{department.label}</option>
-            ))}
-          </Form.Select>
-        </Form.Label>
+        <fieldset className="container border rounded">
+          <legend>Address</legend>
+          <div className="row">
+            <div className="col">
+              <Form.Label htmlFor="street">
+                Street
+                <Form.Control type="text" id="street" name="street" required onChange={isValidStreetInput} />
+              </Form.Label>
 
-      </div>
-      <Alert variant="danger text-center my-4" show={!isFormValid}>
-        Please fill out all fields
-      </Alert>
-      <div className="row justify-content-center my-4 ">
-        <div className="col-2 row justify-content-center">
-          <Button type="submit" className="btn-lg">Save</Button>
+            </div>
+            <div className="col">
+              <Form.Label htmlFor="city">
+                City
+                <Form.Control type="text" id="city" name="city" required onChange={isValidNameInput} />
+              </Form.Label>
+
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <Form.Label htmlFor="state">
+                State
+                <Form.Select id="state" name="state" aria-label="Default select example" required onChange={isValidStateInput}>
+                  {states.map((state) => (
+                    <option key={state.value} value={state.value}>{state.label}</option>
+                  ))}
+                </Form.Select>
+              </Form.Label>
+
+            </div>
+            <div className="col">
+              <Form.Label htmlFor="zipCode">
+                Zip Code
+                <Form.Control type="number" id="zipCode" name="zipCode" min="0" required onChange={isValidNumberInput} />
+              </Form.Label>
+
+            </div>
+          </div>
+        </fieldset>
+        <div>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <Form.Label htmlFor="department">
+            Department
+            <Form.Select id="department" name="department" aria-label="Default select example" required onChange={isValidDepartmentInput}>
+              {departments.map((department) => (
+                <option key={department.value} value={department.value}>{department.label}</option>
+              ))}
+            </Form.Select>
+          </Form.Label>
+
         </div>
-      </div>
-    </Form>
+        <Alert variant="danger text-center my-4" show={!isFormValid}>
+          Please fill out all fields
+        </Alert>
+        <div className="row justify-content-center my-4 ">
+          <div className="col-2 row justify-content-center">
+            <Button type="submit" className="btn-lg">Save</Button>
+          </div>
+        </div>
+      </Form>
+      <Modal />
+    </>
   );
 }

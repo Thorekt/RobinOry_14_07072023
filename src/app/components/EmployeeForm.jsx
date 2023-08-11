@@ -14,9 +14,10 @@ export default function EmployeeForm() {
   const dispatch = useDispatch();
   const { list } = useSelector(selectEmployee);
 
-  const [birthDate, setBirthDate] = useState(new Date());
-  const [startDate, setStartDate] = useState(new Date());
+  const [birthDate, setBirthDate] = useState(null);
+  const [startDate, setStartDate] = useState(null);
   const [isFormValid, setIsFormValid] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const birthDateInputName = 'birthDate';
   const startDateInputName = 'startDate';
@@ -25,6 +26,14 @@ export default function EmployeeForm() {
   const nameRegex = /^[a-zA-Z]+$/;
   const dateRegex = /^(0?[1-9]|1[0-2])[/](0?[1-9]|[12]\d|3[01])[/](19|20)\d{2}$/;
   const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
 
   function toggleInputValidity(input, validity) {
     if (validity === true) {
@@ -158,7 +167,9 @@ export default function EmployeeForm() {
     document.getElementById('firstName').value = '';
     document.getElementById('lastName').value = '';
     document.getElementById('birthDate').value = '';
+    setBirthDate(null);
     document.getElementById('startDate').value = '';
+    setStartDate(null);
     document.getElementById('street').value = '';
     document.getElementById('city').value = '';
     document.getElementById('state').value = '';
@@ -187,6 +198,7 @@ export default function EmployeeForm() {
     };
     dispatch(addEmployeeAction(employee));
     clearForm();
+    openModal();
   }
 
   return (
@@ -288,7 +300,7 @@ export default function EmployeeForm() {
           </div>
         </div>
       </Form>
-      <Modal />
+      <Modal title="test" isModalOpen={isModalOpen} onClickClose={closeModal} />
     </>
   );
 }

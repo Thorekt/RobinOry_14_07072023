@@ -1,24 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/components/modal.css';
 import close from '../assets/images/close-icon.svg';
 
-export default function Modal() {
+export default function Modal({
+  title, children, onClickClose, isModalOpen,
+}) {
   return (
-    <div className="modal-container">
+    <div className={`modal-container ${isModalOpen ? 'active' : ''}`}>
       <div className="modal-content">
         <header className="modal-header">
-          <h3 className="modal-title">Modal Title</h3>
-          <button type="button" className="modal-close">
+          <h3 className="modal-title">{title}</h3>
+          <button type="button" className="modal-close" onClick={onClickClose}>
             <img src={close} alt="close modal button" />
           </button>
         </header>
         <div className="modal-body">
-          <p>Modal Body</p>
+          {children}
         </div>
-        <footer className="modal-footer">
-          <button type="button" className="modal-end">close</button>
-        </footer>
       </div>
     </div>
   );
 }
+
+Modal.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  onClickClose: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+};

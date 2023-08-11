@@ -168,7 +168,7 @@ export default function EmployeeForm() {
   function handleSubmit(e) {
     e.preventDefault();
     const formInputs = e.target.elements;
-    if (!isValidForm(formInputs)) {
+    if (!isValidForm(formInputs) || !e.currentTarget.checkValidity()) {
       alert('Please fill out all fields');
       return;
     }
@@ -192,89 +192,89 @@ export default function EmployeeForm() {
     <Form className="container needs-validation" onSubmit={handleSubmit} noValidate>
       <div className="row">
         <div className="col">
-          <label htmlFor="firstName" className="form-label">
+          <Form.Label htmlFor="firstName">
             First Name
-            <input type="text" id="firstName" name="firstName" className="form-control" required onChange={isValidNameInput} />
-          </label>
+            <Form.Control type="text" id="firstName" name="firstName" required onChange={isValidNameInput} />
+          </Form.Label>
         </div>
         <div className="col">
-          <label htmlFor="lastName" className="form-label">
+          <Form.Label htmlFor="lastName">
             Last Name
-            <input type="text" id="lastName" name="lastName" className="form-control" required onChange={isValidNameInput} />
-          </label>
+            <Form.Control type="text" id="lastName" name="lastName" required onChange={isValidNameInput} />
+          </Form.Label>
         </div>
       </div>
       <div className="row">
         <div className="col">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor={birthDateInputName} className="form-label">
+          <Form.Label htmlFor={birthDateInputName}>
             Date of Birth
             <div>
               <DatePicker className="form-control" id={birthDateInputName} isClearable selected={birthDate} onChange={(date) => handleDateChange(date, birthDateInputName)} required />
             </div>
-          </label>
+          </Form.Label>
 
         </div>
         <div className="col">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor={startDateInputName} className="form-label">
+          <Form.Label htmlFor={startDateInputName}>
             Start Date
             <div>
               <DatePicker className="form-control" id={startDateInputName} isClearable selected={startDate} onChange={(date) => handleDateChange(date, startDateInputName)} required />
             </div>
-          </label>
+          </Form.Label>
         </div>
       </div>
       <fieldset className="container border rounded">
         <legend>Address</legend>
         <div className="row">
           <div className="col">
-            <label htmlFor="street" className="form-label">
+            <Form.Label htmlFor="street">
               Street
-              <input type="text" id="street" name="street" className="form-control" required onChange={isValidStreetInput} />
-            </label>
+              <Form.Control type="text" id="street" name="street" required onChange={isValidStreetInput} />
+            </Form.Label>
 
           </div>
           <div className="col">
-            <label htmlFor="city" className="form-label">
+            <Form.Label htmlFor="city">
               City
-              <input type="text" id="city" name="city" className="form-control" required onChange={isValidNameInput} />
-            </label>
+              <Form.Control type="text" id="city" name="city" required onChange={isValidNameInput} />
+            </Form.Label>
 
           </div>
         </div>
         <div className="row">
           <div className="col">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="state" className="form-label">
+            <Form.Label htmlFor="state">
               State
               <Form.Select id="state" name="state" aria-label="Default select example" required onChange={isValidStateInput}>
                 {states.map((state) => (
                   <option key={state.value} value={state.value}>{state.label}</option>
                 ))}
               </Form.Select>
-            </label>
+            </Form.Label>
 
           </div>
           <div className="col">
-            <label htmlFor="zipCode" className="form-label">
+            <Form.Label htmlFor="zipCode">
               Zip Code
-              <input type="number" id="zipCode" name="zipCode" className="form-control" min="0" required onChange={isValidNumberInput} />
-            </label>
+              <Form.Control type="number" id="zipCode" name="zipCode" min="0" required onChange={isValidNumberInput} />
+            </Form.Label>
 
           </div>
         </div>
       </fieldset>
       <div>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="department" className="form-label">
+        <Form.Label htmlFor="department">
           Department
           <Form.Select id="department" name="department" aria-label="Default select example" required onChange={isValidDepartmentInput}>
             {departments.map((department) => (
               <option key={department.value} value={department.value}>{department.label}</option>
             ))}
           </Form.Select>
-        </label>
+        </Form.Label>
 
       </div>
       <div className="row justify-content-center">

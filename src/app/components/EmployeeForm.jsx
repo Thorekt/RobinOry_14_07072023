@@ -175,6 +175,9 @@ export default function EmployeeForm() {
     document.getElementById('state').value = '';
     document.getElementById('zipCode').value = '';
     document.getElementById('department').value = '';
+    document.querySelectorAll('.is-valid').forEach((element) => {
+      element.classList.remove('is-valid');
+    });
   }
 
   function handleSubmit(e) {
@@ -300,7 +303,9 @@ export default function EmployeeForm() {
           </div>
         </div>
       </Form>
-      <Modal title="test" isModalOpen={isModalOpen} onClickClose={closeModal} />
+      <Modal title="Success" isModalOpen={isModalOpen} onClickClose={closeModal}>
+        <p>Employee Created!</p>
+      </Modal>
     </>
   );
 }

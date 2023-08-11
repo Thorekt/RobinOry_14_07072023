@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/components/modal.css';
+import close from '../assets/images/close-icon.svg';
 
 export default function Modal() {
   return (
@@ -7,7 +8,9 @@ export default function Modal() {
       <div className="modal-content">
         <header className="modal-header">
           <h3 className="modal-title">Modal Title</h3>
-          <button type="button" className="modal-close">X</button>
+          <button type="button" className="modal-close">
+            <img src={close} alt="close modal button" />
+          </button>
         </header>
         <div className="modal-body">
           <p>Modal Body</p>

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,7 +15,7 @@ export default function EmployeeForm() {
 
   const [birthDate, setBirthDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
-  // const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const birthDateInputName = 'birthDate';
   const startDateInputName = 'startDate';
@@ -149,7 +149,7 @@ export default function EmployeeForm() {
     if (!isValidDepartmentInput()) {
       isValid = false;
     }
-
+    setIsFormValid(isValid);
     return isValid;
   }
 
@@ -168,8 +168,8 @@ export default function EmployeeForm() {
   function handleSubmit(e) {
     e.preventDefault();
     const formInputs = e.target.elements;
+
     if (!isValidForm(formInputs) || !e.currentTarget.checkValidity()) {
-      alert('Please fill out all fields');
       return;
     }
     const employee = {
@@ -277,7 +277,10 @@ export default function EmployeeForm() {
         </Form.Label>
 
       </div>
-      <div className="row justify-content-center">
+      <Alert variant="danger text-center my-4" show={!isFormValid}>
+        Please fill out all fields
+      </Alert>
+      <div className="row justify-content-center my-4 ">
         <div className="col-2 row justify-content-center">
           <Button type="submit" className="btn-lg">Save</Button>
         </div>

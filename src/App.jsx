@@ -7,6 +7,11 @@ import NavBar from './app/components/NavBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app/styles/app.css';
 
+/**
+ * App component
+ * @description Renders the app
+ * @returns {JSX.Element}
+ */
 function App() {
   return (
 

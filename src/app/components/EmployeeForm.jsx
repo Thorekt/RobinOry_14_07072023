@@ -10,6 +10,11 @@ import departments from '../assets/datas/departments';
 import states from '../assets/datas/states';
 import Modal from './Modal';
 
+/**
+ * EmployeeForm component (form)
+ * @description This component is a form to add an employee
+ * @returns {JSX.Element}
+ */
 export default function EmployeeForm() {
   const dispatch = useDispatch();
   const { list } = useSelector(selectEmployee);
@@ -27,14 +32,30 @@ export default function EmployeeForm() {
   const dateRegex = /^(0?[1-9]|1[0-2])[/](0?[1-9]|[12]\d|3[01])[/](19|20)\d{2}$/;
   const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
 
+  /**
+   * Open modal
+   * @description This function open the modal
+   * @returns {void}
+   */
   function openModal() {
     setIsModalOpen(true);
   }
 
+  /**
+   * Close modal
+   * @description This function close the modal
+   * @returns {void}
+   */
   function closeModal() {
     setIsModalOpen(false);
   }
 
+  /**
+   * Toggle input validity
+   * @description This function toggle input validity style from validity value
+   * @param {object} input - Input element
+   * @param {boolean} validity - Validity value
+   */
   function toggleInputValidity(input, validity) {
     if (validity === true) {
       if (input.classList.contains('is-invalid')) {
@@ -54,6 +75,12 @@ export default function EmployeeForm() {
     }
   }
 
+  /**
+   * Is valid name input
+   * @description This function check if name input value is valid
+   * @param {object} e - Event object
+   * @returns {boolean} - Validity value
+   */
   function isValidNameInput(e) {
     const input = e.target;
     if (nameRegex.test(input.value) === false || input.value === '') {
@@ -64,6 +91,12 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid number input
+   * @description This function check if number input value is valid
+   * @param {object} e - Event object
+   * @returns {boolean} - Validity value
+   */
   function isValidNumberInput(e) {
     const input = e.target;
     if (numberRegex.test(input.value) === false || input.value === '') {
@@ -74,6 +107,12 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid street input
+   * @description This function check if street input value is valid
+   * @param {object} e - Event object
+   * @returns {boolean} - Validity value
+   */
   function isValidStreetInput(e) {
     const input = e.target;
     if (streetRegex.test(input.value) === false || input.value === '') {
@@ -84,6 +123,11 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid state input
+   * @description This function check if state input value is valid
+   * @returns {boolean} - Validity value
+   */
   function isValidStateInput() {
     const input = document.getElementById('state');
     if (states.find((state) => state.value === input.value) === undefined) {
@@ -94,6 +138,11 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid department input
+   * @description This function check if department input value is valid
+   * @returns {boolean} - Validity value
+   */
   function isValidDepartmentInput() {
     const input = document.getElementById('department');
     if (departments.find((department) => department.value === input.value) === undefined) {
@@ -104,6 +153,12 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid date input
+   * @description This function check if date input value is valid
+   * @param {object} e - Event object
+   * @returns {boolean} - Validity value
+   */
   function isValidDateInput(e) {
     const input = e.target;
     if (dateRegex.test(input.value) === false || input.value === '') {
@@ -114,6 +169,13 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Handle date change
+   * @description This function handle date change
+   * @param {object} date - Date object
+   * @param {string} inputName - Input name
+   * @returns {boolean} - Validity value
+   */
   function handleDateChange(date, inputName) {
     const input = document.getElementById(inputName);
     if (inputName === birthDateInputName) {
@@ -129,6 +191,12 @@ export default function EmployeeForm() {
     return true;
   }
 
+  /**
+   * Is valid form
+   * @description This function check if form is valid
+   * @param {object} formInputs - Form inputs
+   * @returns {boolean} - Validity value
+   */
   function isValidForm(formInputs) {
     let isValid = true;
 
@@ -163,6 +231,11 @@ export default function EmployeeForm() {
     return isValid;
   }
 
+  /**
+   * Clear form
+   * @description This function clear form
+   * @returns {void}
+   */
   function clearForm() {
     document.getElementById('firstName').value = '';
     document.getElementById('lastName').value = '';
@@ -180,6 +253,12 @@ export default function EmployeeForm() {
     });
   }
 
+  /**
+   * Handle submit
+   * @description This function handle submit
+   * @param {object} e - Event object
+   * @returns {void}
+   */
   function handleSubmit(e) {
     e.preventDefault();
     const formInputs = e.target.elements;

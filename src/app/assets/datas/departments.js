@@ -1,3 +1,8 @@
+/**
+ * Departments
+ * @type {Array}
+ * @description List of departments
+ */
 const departments = [
   { value: 'Sales', label: 'Sales' },
   { value: 'Marketing', label: 'Marketing' },

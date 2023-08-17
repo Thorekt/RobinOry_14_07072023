@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import selectEmployee from '../utils/selectors';
 import EmployeeTableRow from './EmployeeTableRow';
 
+/**
+ * EmployeeTable component (table)
+ * @description Renders the employee table
+ * @returns {JSX.Element}
+ */
 export default function EmployeeTable() {
   const { list } = useSelector(selectEmployee);
   const employees = list;

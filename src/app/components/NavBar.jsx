@@ -3,6 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 import '../styles/components/navBar.css';
 import logo from '../assets/images/logo.jpg';
 
+/**
+ * NavBar component (navigation bar)
+ * @description Renders the navigation bar
+ * @returns {JSX.Element}
+ */
 export default function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">

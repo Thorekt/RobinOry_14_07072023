@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * EmployeeTableRow component (table row)
+ * @description Renders a row in the employee table
+ * @param {object} employee - Employee object
+ * @returns {JSX.Element}
+ */
 export default function EmployeeTableRow({ employee }) {
   return (
     <tr>

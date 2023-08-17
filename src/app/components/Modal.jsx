@@ -3,6 +3,22 @@ import PropTypes from 'prop-types';
 import '../styles/components/modal.css';
 import close from '../assets/images/close-icon.svg';
 
+/**
+ * Modal component (modal)
+ * @description Renders a editable modal
+ * @param {string} title - Modal title
+ * @param {node} children - Modal content
+ * @param {function} onClickClose - Function to close modal
+ * @param {boolean} isModalOpen - Modal state
+ * @param {object} classNames - Custom classNames
+ * @param {string} classNames.container - Custom classNames for modal-container
+ * @param {string} classNames.content - Custom classNames for modal-content
+ * @param {string} classNames.header - Custom classNames for modal-header
+ * @param {string} classNames.title - Custom classNames for modal-title
+ * @param {string} classNames.close - Custom classNames for modal-close
+ * @param {string} classNames.body - Custom classNames for modal-body
+ * @returns {JSX.Element}
+ */
 export default function Modal({
   title, children, onClickClose, isModalOpen, classNames,
 }) {

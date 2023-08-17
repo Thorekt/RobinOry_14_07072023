@@ -1,3 +1,8 @@
+/**
+ * Departments
+ * @type {Array}
+ * @description List of states
+ */
 const states = [
   {
     label: 'Alabama',

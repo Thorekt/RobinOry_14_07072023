@@ -1,6 +1,11 @@
 import React from 'react';
 import EmployeeForm from '../components/EmployeeForm';
 
+/**
+ * CreateEmployee component (page)
+ * @description Renders the create employee page
+ * @returns {JSX.Element}
+ */
 export default function CreateEmployee() {
   return (
     <>

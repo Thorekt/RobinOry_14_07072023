@@ -1,6 +1,11 @@
 import React from 'react';
 import EmployeeTable from '../components/EmployeeTable';
 
+/**
+ * EmployeeList component (page)
+ * @description Renders the employee list page
+ * @returns {JSX.Element}
+ */
 export default function EmployeeList() {
   return (
     <>

@@ -12,6 +12,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import selectEmployee from '../utils/selectors';
+import right from '../assets/images/caret-right-solid.svg';
+import left from '../assets/images/caret-left-solid.svg';
 
 const columnHelper = createColumnHelper();
 
@@ -153,9 +155,9 @@ export default function EmployeeTable() {
         </Table>
       </Row>
       <Row>
-        <Col md={2}>
+        <Col md={3} className="pagination">
           Page
-          <strong>
+          <strong className="ms-1">
             {table.getState().pagination.pageIndex + 1}
             {' '}
             of
@@ -167,19 +169,19 @@ export default function EmployeeTable() {
           <>
             <Button
               type="button"
-              className="p-1 m-1"
+              className="p-1 mx-1"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              {'<'}
+              <img src={left} alt="close modal button" />
             </Button>
             <Button
               type="button"
-              className="p-1 m-1"
+              className="p-1 mx-1"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              {'>'}
+              <img src={right} alt="close modal button" />
             </Button>
 
           </>

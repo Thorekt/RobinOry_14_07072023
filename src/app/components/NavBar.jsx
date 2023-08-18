@@ -18,7 +18,7 @@ export default function NavBar() {
         </Link>
         <ul className="nav nav-pills ">
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/">Home</NavLink>
+            <NavLink className="nav-link" to="/">Home</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/EmployeeList">Employee List</NavLink>

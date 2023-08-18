@@ -1,11 +1,14 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
+import {
+  Table, Container, Row, Col, Button,
+} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import selectEmployee from '../utils/selectors';
@@ -80,51 +83,110 @@ export default function EmployeeTable() {
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
-    <Table>
-      <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder ? null : (
-                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                  <div
-                    {...{
-                      className: header.column.getCanSort()
-                        ? 'cursor-pointer select-none'
-                        : '',
-                      onClick: header.column.getToggleSortingHandler(),
-                    }}
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
+    <Container>
+      <Row className="mb-4">
+        <Col md={2}>
+          <select
+            className="form-select"
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => {
+              table.setPageSize(Number(e.target.value));
+            }}
+          >
+            {[5, 10, 25, 50, 100].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show
+                {` ${pageSize} `}
+                entries
+              </option>
+            ))}
+          </select>
+        </Col>
+      </Row>
+      <Row className="mb-4">
+        <Table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {header.isPlaceholder ? null : (
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                      <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? 'cursor-pointer select-none'
+                            : '',
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                        {{
+                          asc: '🔼',
+                          desc: '🔽',
+                        }[header.column.getIsSorted()] ?? null}
+                      </div>
                     )}
-                    {{
-                      asc: ' 🔼',
-                      desc: ' 🔽',
-                    }[header.column.getIsSorted()] ?? null}
-                  </div>
-                )}
-              </th>
+                  </th>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+          </tbody>
+        </Table>
+      </Row>
+      <Row>
+        <Col md={2}>
+          Page
+          <strong>
+            {table.getState().pagination.pageIndex + 1}
+            {' '}
+            of
+            {' '}
+            {table.getPageCount() }
+          </strong>
+          {table.getPageCount() > 1
+          && (
+          <>
+            <Button
+              type="button"
+              className="p-1 m-1"
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {'<'}
+            </Button>
+            <Button
+              type="button"
+              className="p-1 m-1"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {'>'}
+            </Button>
+
+          </>
+          ) }
+
+        </Col>
+      </Row>
+    </Container>
   );
 }

@@ -9,7 +9,11 @@
     background-color: #8dad0b;
     border: var(--bs-btn-border-width) solid #8dad0b;
 }
-
+.btn:disabled{
+    color: #fff;
+    background-color: #bfc999;
+    border: var(--bs-btn-border-width) solid #bfc999;
+}
 .react-datepicker__close-icon{
     right: -30px;
 }

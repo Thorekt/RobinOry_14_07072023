@@ -4,7 +4,7 @@
     border: var(--bs-btn-border-width) solid #6A8206;
 }
 
-.btn:hover, .btn:focus {    
+.btn:hover, .btn:focus, .btn:active, .btn.active, .open > .dropdown-toggle.btn {    
     color: #fff;
     background-color: #8dad0b;
     border: var(--bs-btn-border-width) solid #8dad0b;

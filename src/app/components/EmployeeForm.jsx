@@ -28,9 +28,9 @@ export default function EmployeeForm() {
   const startDateInputName = 'startDate';
 
   const numberRegex = /^[0-9]+$/;
-  const nameRegex = /^[a-zA-Z]+$/;
+  const nameRegex = /^[a-zA-Zà-üÀ-Ü]+$/;
   const dateRegex = /^(0?[1-9]|1[0-2])[/](0?[1-9]|[12]\d|3[01])[/](19|20)\d{2}$/;
-  const streetRegex = /^[a-zA-Z0-9\s,'-]*$/;
+  const streetRegex = /^[a-zA-Zà-üÀ-Ü0-9\s,'-]*$/;
 
   /**
    * Open modal
@@ -159,7 +159,7 @@ export default function EmployeeForm() {
    * @param {object} e - Event object
    * @returns {boolean} - Validity value
    */
-  function isValidDateInput(e) {
+  function isValidStartDateInput(e) {
     const input = e.target;
     if (dateRegex.test(input.value) === false || input.value === '') {
       toggleInputValidity(input, false);
@@ -176,14 +176,51 @@ export default function EmployeeForm() {
    * @param {string} inputName - Input name
    * @returns {boolean} - Validity value
    */
-  function handleDateChange(date, inputName) {
-    const input = document.getElementById(inputName);
-    if (inputName === birthDateInputName) {
-      setBirthDate(date);
-    } else {
-      setStartDate(date);
-    }
+  function handleStartDateChange(date) {
+    const input = document.getElementById(startDateInputName);
+    setStartDate(date);
     if (dateRegex.test(date) === false || input.value === '') {
+      toggleInputValidity(input, false);
+      return false;
+    }
+    toggleInputValidity(input, true);
+    return true;
+  }
+
+  /**
+   * Is valid birth date input
+   * @description This function check if birth date input value is valid
+   * @param {object} e - Event object
+   * @returns {boolean} - Validity value
+   */
+  function isValidBirthDateInput(e) {
+    const input = e.target;
+    if (dateRegex.test(input.value) === false || input.value === '') {
+      toggleInputValidity(input, false);
+      return false;
+    }
+    const curentYear = new Date().getFullYear();
+    const year = birthDate.getFullYear();
+    if (curentYear - year < 18) {
+      toggleInputValidity(input, false);
+      return false;
+    }
+    toggleInputValidity(input, true);
+    return true;
+  }
+
+  /**
+   * Handle birth date change
+   * @description This function handle birth date change
+   * @param {object} date - Date object
+   * @returns {boolean} - Validity value
+   */
+  function handleBirthDateChange(date) {
+    const input = document.getElementById(birthDateInputName);
+    setBirthDate(date);
+    const curentYear = new Date().getFullYear();
+    const year = date.getFullYear();
+    if (curentYear - year < 18) {
       toggleInputValidity(input, false);
       return false;
     }
@@ -206,10 +243,10 @@ export default function EmployeeForm() {
     if (!isValidNameInput({ target: formInputs.lastName })) {
       isValid = false;
     }
-    if (!isValidDateInput({ target: formInputs.birthDate })) {
+    if (!isValidBirthDateInput({ target: formInputs.birthDate })) {
       isValid = false;
     }
-    if (!isValidDateInput({ target: formInputs.startDate })) {
+    if (!isValidStartDateInput({ target: formInputs.startDate })) {
       isValid = false;
     }
     if (!isValidStreetInput({ target: formInputs.street })) {
@@ -291,12 +328,18 @@ export default function EmployeeForm() {
             <Form.Label htmlFor="firstName">
               First Name
               <Form.Control type="text" id="firstName" name="firstName" required onChange={isValidNameInput} />
+              <div className="invalid-feedback">
+                Your first name is invalid, it must contain only letters.
+              </div>
             </Form.Label>
           </div>
           <div className="col">
             <Form.Label htmlFor="lastName">
               Last Name
               <Form.Control type="text" id="lastName" name="lastName" required onChange={isValidNameInput} />
+              <div className="invalid-feedback">
+                Your last name is invalid, it must contain only letters.
+              </div>
             </Form.Label>
           </div>
         </div>
@@ -306,7 +349,10 @@ export default function EmployeeForm() {
             <Form.Label htmlFor={birthDateInputName}>
               Date of Birth
               <div>
-                <DatePicker className="form-control" id={birthDateInputName} isClearable selected={birthDate} onChange={(date) => handleDateChange(date, birthDateInputName)} required />
+                <DatePicker className="form-control" id={birthDateInputName} isClearable selected={birthDate} onChange={(date) => handleBirthDateChange(date)} required />
+              </div>
+              <div className="invalid-feedback">
+                You must be at least 18 years old. You must enter a valid date.
               </div>
             </Form.Label>
 
@@ -316,7 +362,10 @@ export default function EmployeeForm() {
             <Form.Label htmlFor={startDateInputName}>
               Start Date
               <div>
-                <DatePicker className="form-control" id={startDateInputName} isClearable selected={startDate} onChange={(date) => handleDateChange(date, startDateInputName)} required />
+                <DatePicker className="form-control" id={startDateInputName} isClearable selected={startDate} onChange={(date) => handleStartDateChange(date)} required />
+              </div>
+              <div className="invalid-feedback">
+                You must enter a valid date.
               </div>
             </Form.Label>
           </div>
@@ -328,6 +377,10 @@ export default function EmployeeForm() {
               <Form.Label htmlFor="street">
                 Street
                 <Form.Control type="text" id="street" name="street" required onChange={isValidStreetInput} />
+                <div className="invalid-feedback">
+                  Your street is invalid, it must contain only letters,
+                  numbers, spaces
+                </div>
               </Form.Label>
 
             </div>
@@ -335,6 +388,9 @@ export default function EmployeeForm() {
               <Form.Label htmlFor="city">
                 City
                 <Form.Control type="text" id="city" name="city" required onChange={isValidNameInput} />
+                <div className="invalid-feedback">
+                  Your city is invalid, it must contain only letters.
+                </div>
               </Form.Label>
 
             </div>
@@ -349,6 +405,9 @@ export default function EmployeeForm() {
                     <option key={state.value} value={state.value}>{state.label}</option>
                   ))}
                 </Form.Select>
+                <div className="invalid-feedback">
+                  You must select a state.
+                </div>
               </Form.Label>
 
             </div>
@@ -356,6 +415,9 @@ export default function EmployeeForm() {
               <Form.Label htmlFor="zipCode">
                 Zip Code
                 <Form.Control type="number" id="zipCode" name="zipCode" min="0" required onChange={isValidNumberInput} />
+                <div className="invalid-feedback">
+                  Your zip code is invalid, it must contain only numbers.
+                </div>
               </Form.Label>
 
             </div>
@@ -370,6 +432,9 @@ export default function EmployeeForm() {
                 <option key={department.value} value={department.value}>{department.label}</option>
               ))}
             </Form.Select>
+            <div className="invalid-feedback">
+              You must select a department.
+            </div>
           </Form.Label>
 
         </div>

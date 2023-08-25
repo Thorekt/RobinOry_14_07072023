@@ -4,11 +4,11 @@ import { Alert, Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Modal } from 'ro_oc_14_plugin_modal';
 import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
 import departments from '../assets/datas/departments';
 import states from '../assets/datas/states';
-import Modal from './Modal';
 
 /**
  * EmployeeForm component (form)

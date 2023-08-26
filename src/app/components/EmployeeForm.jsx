@@ -9,6 +9,7 @@ import selectEmployee from '../utils/selectors';
 import { addEmployeeAction } from '../features/employee';
 import departments from '../assets/datas/departments';
 import states from '../assets/datas/states';
+import '../styles/components/modal.css';
 
 /**
  * EmployeeForm component (form)
@@ -22,7 +23,7 @@ export default function EmployeeForm() {
   const [birthDate, setBirthDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [isFormValid, setIsFormValid] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const birthDateInputName = 'birthDate';
   const startDateInputName = 'startDate';
@@ -320,6 +321,15 @@ export default function EmployeeForm() {
     openModal();
   }
 
+  const modalClassNames = {
+    container: 'my-modal-container',
+    body: 'my-modal-body',
+    content: 'my-modal-content',
+    header: 'my-modal-header',
+    title: 'my-modal-title',
+    close: 'my-modal-close',
+  };
+
   return (
     <>
       <Form className="container needs-validation" onSubmit={handleSubmit} noValidate>
@@ -447,7 +457,7 @@ export default function EmployeeForm() {
           </div>
         </div>
       </Form>
-      <Modal title="Success" isModalOpen={isModalOpen} onClickClose={closeModal}>
+      <Modal title="Success" isModalOpen={isModalOpen} onClickClose={closeModal} classNames={modalClassNames}>
         <p>Employee Created!</p>
       </Modal>
     </>

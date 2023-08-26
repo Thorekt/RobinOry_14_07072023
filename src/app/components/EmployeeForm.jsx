@@ -23,7 +23,7 @@ export default function EmployeeForm() {
   const [birthDate, setBirthDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [isFormValid, setIsFormValid] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const birthDateInputName = 'birthDate';
   const startDateInputName = 'startDate';
